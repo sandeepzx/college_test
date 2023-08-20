@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Google online fonts -->
+    <link href="//fonts.googleapis.com/css?family=Work+Sans:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800&display=swap" rel="stylesheet">
+    <!-- Template CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}">
+<link href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/about.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'styles/about_responsive.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"  >
+    <style>
+      .dropbtn {
+    font-size: 16px;
+    border: none;
+  }
+  
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  .dropdown-content a:hover {background-color: #ddd;}
+  
+  .dropdown:hover .dropdown-content {display: block;}
+  
+  
+    </style>
+    <script>
+      // Define course options for each department
+      var courseOptions = {
+          'Commerce': ['BBA', 'BCom', 'MCom'],
+          'Science': ['BSc', 'MSc', 'PhD'],
+          'Arts': ['BA', 'MA', 'Drama'],
+          
+      };
+
+      
+      function updateCourses() {
+          var departmentDropdown = document.getElementById('department');
+          var courseDropdown = document.getElementById('course');
+          var selectedDepartment = departmentDropdown.value;
+          var courses = courseOptions[selectedDepartment];
+
+          
+          courseDropdown.innerHTML = '';
+
+          // Add new course options
+          for (var i = 0; i < courses.length; i++) {
+              var option = document.createElement('option');
+              option.value = courses[i];
+              option.text = courses[i];
+              courseDropdown.appendChild(option);
+          }
+      }
+  </script>
+</head>
+<body>
+   
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <img src="{% static 'images/2.jpg' %}" width="30px" alt="">
+          
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="{% url 'schoolapp:home' %}">Home</a>
+              </li>
+              {% if user.is_authenticated %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'schoolapp:logout' %}">logout</a>
+              </li>
+
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'schoolapp:login' %}">Login</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'schoolapp:register' %}">Register</a>
+              </li>
+              {% endif %}
+              
+               
+              <div class=" nav-item dropdown">
+                <button class="nav-link dropbtn">Department</button>
+                <div class="dropdown-content">
+                  <a href="#">Commerce</a>
+                  <a href="#">Science</a>
+                  <a href="#">Arts</a>
+                </div>
+              </div>
+              
+            </ul>
+          </div>
+        </div>
+      </nav>
+    {% block body %}
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block title %}New{% endblock %}
+{% block body %}
+
+<div class="container">
+    <form action="" method="post" style="padding-top: 0.8rem; padding-left: 10vw; padding-right: 10vw;">
+        {% csrf_token %}
+        <div class="rounded col-sm-12" style="border: 2px solid black;">
+            <div class="inside row" style="padding: 0.5rem;">
+                <h1 style="color: #0d6efd; text-align: center;"><strong>DETAILS</strong></h1><br>
+                <div class="form-outline mb-4 col-md-6">
+                    <label for="name" class="form-label" style="text-align: left;"><b>Name</b></label>
+                    <input type="text" name="name" id="name" class="form-control" required>
+                </div>
+                <div class="form-outline mb-4 col-md-6">
+                    <label for="dob" class="form-label" style="text-align: left;"><b>Date Of Birth</b></label>
+                    <input type="date" name="dob" id="dob" class="form-control" required>
+                </div>
+                <div class="form-outline mb-4 col-md-6">
+                    <label for="age" class="form-label" style="text-align: left;"><b>Age</b></label>
+                    <input type="number" name="age" id="age" class="form-control" required>
+                </div>
+                <div class="form-outline mb-4 col-md-6">
+                    <label for="gender" class="form-label" style="text-align: left;"><b>Gender</b></label>
+                    <select name="gender"  id="gender" class="form-control" >
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>
+                </div>
+                <div class="form-outline mb-4 col-md-6">
+                    <label for="phone" class="form-label" style="text-align: left;"><b>Phone Number</b></label>
+                    <input type="number" name="phone" id="phone" class="form-control" required>
+                </div>
+                <div class="form-outline mb-4 col-md-6">
+                    <label for="mail" class="form-label" style="text-align: left;"><b>Email</b></label>
+                    <input type="email" name="mail" id="mail" class="form-control" required>
+                </div>
+                <div class="form-outline mb-4 col-md-6">
+                    <label for="department" class="form-label" style="text-align: left;"><b>Department</b></label>
+                    <select id="department" name="department" class="form-control" onchange="updateCourses()">
+                        <option value="Commerce">Commerce</option>
+                        <option value="Science">Science</option>
+                        <option value="Arts">Arts</option>
+                        
+                    </select>
+                </div>
+                <div class="form-outline mb-4 col-md-6">
+                    <label for="course" class="form-label" style="text-align: left;"><b>Courses</b></label>
+                    <select id="course" name="course" class="form-control">
+                        <option value="BBA">BBA</option>
+                        <option value="BCom">BCom</option>
+                        <option value="MCom">MCom</option>
+                    </select>
+                </div>
+                <div class="form-outline mb-4 col-md-6">
+                    <label for="purpose" class="form-label" style="text-align: left;"><b>Purpose</b></label>
+                    <select id="purpose" name="purpose" class="form-control">
+                        <option value="Enquiry">Enquiry</option>
+                        <option value="Place Order">Place Order</option>
+                        <option value="Return">Return</option>
+                        
+                    </select>
+                </div>
+                <div class="form-outline mb-4 col-md-6">
+                    <label for="name" class="form-label" style="text-align: left;"><b>Materials Provided:</b></label><br>
+                    <input type="checkbox" id="notebook" name="material1" value="Note Book">
+                    <label for="notebook">Note Book</label>
+                    <input type="checkbox" id="pen" name="material2" value="Pen">
+                    <label for="pen">Pen</label>
+                    <input type="checkbox" id="papers" name="material3" value="Exam Papers">
+                    <label for="papers">Exam Papers</label>
+                </div>
+                <div class="text-center">
+                    <!-- Submit button -->
+                    <button type="submit" style="text-align: center;" class="btn btn-success btn-block mb-4">Submit</button>
+                    {% for msg in messages %}
+                    <p>{{msg}} <a href="{% url 'schoolapp:home' %}">Home</a></p>
+                    {% endfor %}
+                </div>  
+            </div>
+        </div>  
+    </form>
+</div>
+{% endblock %}

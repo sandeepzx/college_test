@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block title %}Register{% endblock %}
+{% block body %}
+
+<div class="container">
+  
+  <form action="" method="post" style="padding-top: 4vh; padding-left: 28vw;">
+    {% csrf_token %}
+    <div class="rounded col-sm-6" style="border: 2px solid black;">
+      <div class="inside" style="padding: 0.5rem;">
+      <h1 style="color: #0d6efd; text-align: center;"><strong>REGISTER</strong></h1><br>
+      <!-- Username input -->
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form2Example1">Username</label>
+        <input type="text" name="username" id="form2Example1" class="form-control" required/>
+      </div>
+    
+      <!-- Password input -->
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form2Example2">Password</label>
+        <input type="password" name="password" id="form2Example2" class="form-control" required/>
+      </div>
+
+      <!-- Confirm Password input -->
+      <div class="form-outline mb-4">
+        <label class="form-label" for="form2Example3">Confirm Password</label>
+        <input type="password" name="cpassword" id="form2Example3" class="form-control" required/>
+      </div>
+    
+      
+      <div class="text-center">
+        <!-- Submit button -->
+        <input type="submit" class="btn btn-primary btn-block mb-4" value="Sign up">
+        <!-- Register buttons -->
+        <p>Already a member? <a href="{% url 'schoolapp:login' %}">Login</a></p>
+      </div>
+      {% for msg in messages %}
+        <p style="color: crimson;"><b>{{msg}}</b></p>
+      {% endfor %}
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock %}
